@@ -1,6 +1,12 @@
-FROM python:3.7
+FROM ubuntu:20.04
+# FROM python:3.7
 
 WORKDIR /root
+
+RUN apt-get update -y && apt-get install -y \
+                         gnupg \
+                         wget \
+                         tree
 
 RUN wget \
        https://dvc.org/deb/dvc.list \
@@ -8,9 +14,8 @@ RUN wget \
 
 RUN wget -qO - https://dvc.org/deb/iterative.asc | apt-key add -
 
-RUN apt update -y && apt install -y \
-                     dvc \
-                     tree
+RUN apt-get update -y && apt-get install -y \
+                         dvc 
 
 COPY bashrc .bashrc
 

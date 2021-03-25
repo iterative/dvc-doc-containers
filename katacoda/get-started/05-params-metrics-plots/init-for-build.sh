@@ -8,7 +8,6 @@ clear
 :;: ===================================
 :;: Let\'s create a new DVC project 
 :;: ===================================
-cd /root/project
 git init 
 dvc init
 git add .
