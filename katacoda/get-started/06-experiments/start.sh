@@ -3,9 +3,9 @@
 # clear screen
 clear
 
-echo "##########################"
-echo "# DVC Versioning Example #"
-echo "##########################"
+echo "###########################"
+echo "# DVC Experiments Example #"
+echo "###########################"
 
 tree .
 dvc version
