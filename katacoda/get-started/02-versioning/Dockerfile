@@ -1,4 +1,4 @@
-FROM emresult/dvc-katacoda-base:latest
+FROM emresult/katacoda-base:latest
 
 RUN git clone https://github.com/iterative/example-get-started --branch 1-dvc-init && git -C /root/example-get-started/ checkout -b katacoda-changes
 

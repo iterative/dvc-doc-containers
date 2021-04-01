@@ -1,4 +1,4 @@
-FROM emresult/dvc-katacoda-base:latest
+FROM dvcorg/katacoda-base:latest
 
 RUN apt-get update -y && apt-get install -y \
                          python3 \

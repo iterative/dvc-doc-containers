@@ -1,4 +1,4 @@
-FROM emresult/dvc-katacoda-base:latest
+FROM dvcorg/katacoda-base:latest
 
 
 RUN git clone \
