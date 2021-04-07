@@ -11,7 +11,7 @@ simply need:
 
 Note that `build-all.zsh` script has a `TAGPREFIX` setting which should be set
 to a Docker Hub id. The script will report errors if you don't have permission
-to push to [docker.io/dvcorg][https://docker.io/dvcorg]. You can change
+to push to [docker.io/dvcorg](https://docker.io/dvcorg). You can change
 `TAGPREFIX` in `build-all.zsh` to use the script to manage your own images. 
 
 Each leaf folder contains a `Dockerfile` to build image and an (optional)
