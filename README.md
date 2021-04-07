@@ -21,3 +21,8 @@ changing `<space>` and `/`s in directory name to `-`.
 
 As of April 2021, the repository contains images for Katacoda Getting Started
 scenarios.
+
+The containers in this repository are also used in
+[markdown-code-runner](https://github.com/iterative/markdown-code-runner) to
+test [the scenarios](https://github.com/iterative/katacoda-scenarios) and [the
+documentation](https://github.com/iterative/dvc.org). 
