@@ -1,13 +1,17 @@
-FROM dvcorg/katacoda-base:latest
+FROM emresult/doc-katacoda:base
 
-RUN apt-get update -y && apt-get install -y \
+ARG RELEASE_HASH 
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    apt-get update -y && apt-get install -y \
                          python3 \
                          python-is-python3 \
                          python3-pip
 
-RUN pip3 install dvc
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    pip3 install dvc
 
-RUN git init /root/example-get-started
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    git init /root/example-get-started
 
 WORKDIR /root/example-get-started
 

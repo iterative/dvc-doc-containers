@@ -1,6 +1,8 @@
-FROM dvcorg/katacoda-base:latest
+FROM emresult/doc-katacoda:base
 
-RUN git clone \
+ARG RELEASE_HASH
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    git clone \
     https://github.com/iterative/example-get-started \
     --branch 7-ml-pipeline \ 
     && git -C /root/example-get-started \
@@ -9,7 +11,8 @@ RUN git clone \
 
 WORKDIR /root/example-get-started
 
-RUN apt-get update -y \
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    apt-get update -y \
     && apt-get install -y \
                python3 \
                python3-pip \
@@ -18,7 +21,8 @@ RUN apt-get update -y \
 
 
 COPY dvc.yaml dvc.yaml
-RUN dvc pull \
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    dvc pull \
     && head -n 12000 data/data.xml > data/data.xml.1  \
     && mv data/data.xml.1 data/data.xml \
     && dvc add data/data.xml \

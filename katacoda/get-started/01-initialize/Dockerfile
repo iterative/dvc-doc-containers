@@ -1,7 +1,8 @@
-FROM dvcorg/katacoda-base:latest
+FROM emresult/doc-katacoda:base
 
 
-RUN git clone https://github.com/iterative/example-get-started --branch 0-git-init
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    git clone https://github.com/iterative/example-get-started --branch 0-git-init
 
 WORKDIR /root/example-get-started
 COPY start.sh /root/start.sh

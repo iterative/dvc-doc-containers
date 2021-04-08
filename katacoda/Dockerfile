@@ -2,7 +2,9 @@ FROM ubuntu:20.04
 
 WORKDIR /root
 
-RUN apt-get update -y && apt-get install -y \
+ARG RELEASE_HASH
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    apt-get update -y && apt-get install -y \
                          gnupg \
                          wget \
                          tree
@@ -13,8 +15,9 @@ RUN wget \
 
 RUN wget -qO - https://dvc.org/deb/iterative.asc | apt-key add -
 
-RUN apt-get update -y && apt-get install -y \
-                         dvc 
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    apt-get update -y && apt-get install -y \
+                                 dvc 
 
 COPY bashrc .bashrc
 
