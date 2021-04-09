@@ -15,7 +15,7 @@
 
 RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum)
 
-TAGPREFIX=emresult
+TAGPREFIX=dvcorg
 DIR=$(dirname $0)
 
 find $DIR -name Dockerfile | sort | while read -r filepath ; do
