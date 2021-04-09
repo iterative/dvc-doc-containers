@@ -1,4 +1,4 @@
-FROM emresult/doc-katacoda:base
+FROM dvcorg/doc-katacoda:base
 
 RUN RELEASE_HASH=${RELEASE_HASH} \
     git clone https://github.com/iterative/example-get-started \

@@ -1,4 +1,4 @@
-FROM emresult/doc-katacoda:base
+FROM dvcorg/doc-katacoda:base
 
 
 ARG RELEASE_HASH
