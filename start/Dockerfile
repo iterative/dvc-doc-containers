@@ -1,7 +1,6 @@
 FROM ubuntu:20.04
 
 WORKDIR /root
-
 ARG RELEASE_HASH
 RUN RELEASE_HASH=${RELEASE_HASH} \
     apt-get update -y && apt-get install -y \
@@ -17,7 +16,7 @@ RUN wget -qO - https://dvc.org/deb/iterative.asc | apt-key add -
 
 RUN RELEASE_HASH=${RELEASE_HASH} \
     apt-get update -y && apt-get install -y \
-                                 dvc 
+                         dvc 
 
 COPY bashrc .bashrc
 
