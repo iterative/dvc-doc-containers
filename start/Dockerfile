@@ -1,6 +1,10 @@
 FROM ubuntu:20.04
 
 WORKDIR /root
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 ARG RELEASE_HASH
 RUN RELEASE_HASH=${RELEASE_HASH} \
     apt-get update -y && apt-get install -y \
