@@ -28,7 +28,7 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
         TAG=$(echo "${dockerdir}[3,100]}" | tr '/ ' '--')
     fi
     echo "BUILDING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
-    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${filepath:h}
+    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${dockerdirw}
     echo "PUSHING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
     docker push ${TAGPREFIX}/${TAG}
 done
