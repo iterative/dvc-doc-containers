@@ -13,7 +13,9 @@
 #
 # docker build command uses --no-cache option to prevent stale layers to be used. 
 
-RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum)
+set -vex
+
+RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)
 
 TAGPREFIX=dvcorg
 DIR=$(dirname $0)
@@ -28,7 +30,7 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
         TAG=$(echo "${dockerdir}[3,100]}" | tr '/ ' '--')
     fi
     echo "BUILDING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
-    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${dockerdirw}
+    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${dockerdir}/
     echo "PUSHING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
     docker push ${TAGPREFIX}/${TAG}
 done
