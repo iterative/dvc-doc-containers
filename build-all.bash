@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 
 # This script builds all Docker containers described by Dockerfiles in this repository
@@ -13,20 +13,24 @@
 #
 # docker build command uses --no-cache option to prevent stale layers to be used. 
 
-RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum)
+set -vex
+
+RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)
 
 TAGPREFIX=dvcorg
 DIR=$(dirname $0)
+cd "${DIR}"
 
 find $DIR -name Dockerfile | sort | while read -r filepath ; do
-    tagfile=${filepath:h}/Dockertag
+    dockerdir=$(dirname ${filepath})
+    tagfile=${dockerdir}/Dockertag
     if [ -f ${tagfile} ] ; then
         TAG=$(head -n 1 ${tagfile})
     else
-        TAG=$(echo "${${filepath:h}[3,100]}" | tr '/ ' '--')
+        TAG=$(echo "${dockerdir}[3,100]}" | tr '/ ' '--')
     fi
-    echo "BUILDING: ${filepath} with the tag: ${TAGPREFIX}/${TAG}"
-    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${filepath:h}
-    echo "PUSHING: ${filepath} with the tag: ${TAGPREFIX}/${TAG}"
+    echo "BUILDING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
+    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${dockerdir}/
+    echo "PUSHING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
     docker push ${TAGPREFIX}/${TAG}
 done
