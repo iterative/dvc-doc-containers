@@ -1,3 +1,7 @@
+# DVC Documentation Containers
+
+[![build-all](https://github.com/iterative/dvc-doc-containers/actions/workflows/build-all.yml/badge.svg)](https://github.com/iterative/dvc-doc-containers/actions/workflows/build-all.yml)
+
 This repository contains `Dockerfile`s to create containers to run
 documentation examples in the [DVC documentation](https://dvc.org/doc/) and
 [Katacoda scenarios](https://katacoda.com/dvc/). 
