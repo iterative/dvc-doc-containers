@@ -3,7 +3,8 @@ FROM dvcorg/doc-katacoda:base
 ARG RELEASE_HASH
 RUN RELEASE_HASH=${RELEASE_HASH} \
     git clone \
-    https://github.com/iterative/dvc-get-started-mnist /root/example-get-started/ \
+    https://github.com/iterative/dvc-get-started --branch evaluation \
+    /root/example-get-started/ \
     && git -C /root/example-get-started checkout -b katacoda-project
 
 
