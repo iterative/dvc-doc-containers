@@ -1,0 +1,29 @@
+FROM python:3.8
+
+WORKDIR /root
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    apt-get update -y && apt-get install -y \
+                         gnupg \
+                         wget \
+                         tree
+                         
+RUN RELEASE_HASH=${RELEASE_HASH} \
+    pip install 'dvc[all]'
+
+COPY dvc-get-started dvc-get-started
+COPY .bashrc .bashrc
+
+# Configure git user name and email
+RUN git config --global user.email "guest@example.com" \
+    && git config --global user.name "Guest User"
+
+CMD ["/bin/bash", "-i"]
+
+
+
+
+
