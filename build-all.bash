@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 # This script builds all Docker containers described by Dockerfiles in this repository
@@ -15,9 +15,14 @@
 
 set -vex
 
-RELEASE_HASH=$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)
+HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 
-TAGPREFIX=dvcorg
+export RELEASE_HASH="${RELEASE_HASH:-$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)}"
+export TAGPREFIX="${TAGPREFIX:-dvcorg}"
+
+
+./generate-all.bash
+
 DIR=$(dirname $0)
 cd "${DIR}"
 
@@ -31,6 +36,4 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
     fi
     echo "BUILDING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
     docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAGPREFIX}/${TAG} ${dockerdir}/
-    echo "PUSHING: ${dockerdir} with the tag: ${TAGPREFIX}/${TAG}"
-    docker push ${TAGPREFIX}/${TAG}
 done
