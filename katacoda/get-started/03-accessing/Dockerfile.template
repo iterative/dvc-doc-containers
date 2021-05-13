@@ -1,6 +1,5 @@
-FROM dvcorg/doc-katacoda:base
+FROM ${TAG_PREFIX}/doc-katacoda:base
 
-ARG RELEASE_HASH 
 RUN RELEASE_HASH=${RELEASE_HASH} \
     apt-get update -y && apt-get install -y \
                          python3 \

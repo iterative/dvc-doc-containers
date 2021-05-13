@@ -1,6 +1,5 @@
-FROM dvcorg/doc-katacoda:base
+FROM ${TAG_PREFIX}/doc-katacoda:base
 
-ARG RELEASE_HASH
 RUN RELEASE_HASH=${RELEASE_HASH} \
     git clone \
     https://github.com/iterative/dvc-get-started --branch evaluation \
@@ -18,9 +17,6 @@ RUN RELEASE_HASH=${RELEASE_HASH} \
                python-is-python3 \
     && pip3 install -r requirements.txt
 
-
-# RUN RELEASE_HASH=${RELEASE_HASH} \
-#     dvc pull 
 
 COPY start.sh /root/start.sh
 
