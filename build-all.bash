@@ -16,7 +16,7 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
     if [ -f ${tagfile} ] ; then
         TAG=$(head -n 1 ${tagfile})
     else
-        TAG=$(echo "${dockerdir}[3,100]}" | tr '/ ' '--')
+        TAG=$(echo "${dockerdir}" | tr '/ ' '--')
     fi
     echo "BUILDING: ${dockerdir} with the tag: ${TAG_PREFIX}/${TAG}"
     docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAG_PREFIX}/${TAG} ${dockerdir}/
