@@ -9,7 +9,7 @@ find "${HERE}" -name generate.* | sort | while read -r filepath ; do
     filename=$(basename -- "$filepath")
     dirname=$(dirname -- "$filepath")
     ext="${filename##*.}"
-    cd $dirname
+    pushd $dirname
     if [[ "$ext" == "bash" ]] ; then
         bash "$filename"
     elif [[ "$ext" == "sh" ]] ; then
@@ -21,6 +21,6 @@ find "${HERE}" -name generate.* | sort | while read -r filepath ; do
     else
         echo "UNSUPPORTED GENERATOR SCRIPT: $filepath"
     fi
-    cd -
+    popd
 done
 
