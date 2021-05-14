@@ -1,1 +1,1 @@
-dvcorg/doc-start:${GIT_TAG}
+${TAG_PREFIX}/doc-start:${GIT_TAG}
