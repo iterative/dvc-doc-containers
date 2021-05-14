@@ -18,6 +18,12 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
     else
         TAG=$(echo "${dockerdir}" | tr '/ ' '--')
     fi
-    echo "BUILDING: ${dockerdir} with the tag: ${TAG_PREFIX}/${TAG}"
-    docker build --build-arg RELEASE_HASH=${RELEASE_HASH} -t ${TAG_PREFIX}/${TAG} ${dockerdir}/
+
+    if [[ "${TAG}" =~ "${TAG_PREFIX}/" ]] ; then
+        echo "BUILDING: ${dockerdir} with the tag: ${TAG}"
+        docker build -t ${TAG} ${dockerdir}/
+    else
+        echo "BUILDING: ${dockerdir} with the tag: ${TAG_PREFIX}/${TAG}"
+        docker build -t ${TAG_PREFIX}/${TAG} ${dockerdir}/
+    fi
 done
