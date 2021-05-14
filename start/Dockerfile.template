@@ -17,6 +17,10 @@ RUN RELEASE_HASH=${RELEASE_HASH} \
 COPY dvc-get-started dvc-get-started
 COPY .bashrc .bashrc
 
+WORKDIR /root/dvc-get-started
+
+RUN bash -c "if [ -d .dvc ] ; then dvc pull ; fi"
+
 # Configure git user name and email
 RUN git config --global user.email "guest@example.com" \
     && git config --global user.name "Guest User"
