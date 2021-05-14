@@ -20,13 +20,13 @@ for TAG in ${GIT_TAGS} ; do
     TAG_DIR="build/${TAG}"
     mkdir -p "${TAG_DIR}" 
 
-    export GIT_TAG=${TAG}
+    export GIT_TAG="${TAG}"
 
-    git clone build/dvc-get-started -b ${GIT_TAG} ${TAG_DIR}/dvc-get-started
+    git clone build/dvc-get-started -b "${GIT_TAG}" "${TAG_DIR}/dvc-get-started"
 
-    cp bashrc ${TAG_DIR}/.bashrc
-    cat Dockerfile.template | envsubst > ${TAG_DIR}/Dockerfile
-    cat Dockertag.template | envsubst > ${TAG_DIR}/Dockertag
+    cp bashrc "${TAG_DIR}/.bashrc"
+    cat Dockerfile.template | envsubst > "${TAG_DIR}/Dockerfile"
+    cat Dockertag.template | envsubst > "${TAG_DIR}/Dockertag"
 done
 
 unset GIT_TAG
