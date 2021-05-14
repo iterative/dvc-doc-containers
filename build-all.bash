@@ -7,9 +7,6 @@ HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 export RELEASE_HASH="${RELEASE_HASH:-$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)}"
 export TAG_PREFIX="${TAG_PREFIX:-dvcorg}"
 
-
-./generate-all.bash
-
 DIR=$(dirname $0)
 cd "${DIR}"
 
