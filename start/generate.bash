@@ -9,18 +9,20 @@ if [[ -d build ]] ; then
     exit
 fi
 
+mkdir build
+
 # Clone dvc-get-started
-git clone https://github.com/iterative/dvc-get-started
+git clone https://github.com/iterative/dvc-get-started build/dvc-get-started
 
 GIT_TAGS=$(git -C dvc-get-started tag --list)
 
 for TAG in ${GIT_TAGS} ; do
     TAG_DIR="build/${TAG}"
-    mkdir -p ${TAG_DIR}
+    mkdir -p "${TAG_DIR}" 
 
     export GIT_TAG=${TAG}
 
-    git clone dvc-get-started -b ${GIT_TAG} ${TAG_DIR}/dvc-get-started
+    git clone build/dvc-get-started -b ${GIT_TAG} ${TAG_DIR}/dvc-get-started
 
     cp bashrc ${TAG_DIR}/.bashrc
     cat Dockerfile.template | envsubst > ${TAG_DIR}/Dockerfile
@@ -28,4 +30,3 @@ for TAG in ${GIT_TAGS} ; do
 done
 
 unset GIT_TAG
-unset RELEASE_HASH
