@@ -5,10 +5,7 @@ set -uvex
 HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 export TAG_PREFIX="${TAG_PREFIX:-dvcorg}"
 
-DIR=$(dirname $0)
-cd "${DIR}"
-
-find ${DIR} -name generate.* | sort | while read -r filepath ; do 
+find "${HERE}" -name generate.* | sort | while read -r filepath ; do 
     filename=$(basename -- "$filepath")
     dirname=$(dirname -- "$filepath")
     ext="${filename##*.}"

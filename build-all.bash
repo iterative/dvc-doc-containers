@@ -6,23 +6,20 @@ HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 
 export TAG_PREFIX="${TAG_PREFIX:-dvcorg}"
 
-DIR=$(dirname $0)
-cd "${DIR}"
-
-find $DIR -name Dockerfile | sort | while read -r filepath ; do
-    dockerdir=$(dirname ${filepath})
-    tagfile=${dockerdir}/Dockertag
-    if [ -f ${tagfile} ] ; then
-        TAG=$(head -n 1 ${tagfile})
+find "${HERE}" -name Dockerfile | sort | while read -r filepath ; do
+    dockerdir=$(dirname "${filepath}")
+    tagfile="${dockerdir}/Dockertag"
+    if [ -f "${tagfile}" ] ; then
+        TAG=$(head -n 1 "${tagfile}")
     else
-        TAG=$(echo "${dockerdir}" | tr '/ ' '--')
+        TAG=$(echo "${dockerdir:3:100}" | tr '/ ' '--')
     fi
 
     if [[ "${TAG}" =~ "${TAG_PREFIX}/" ]] ; then
         echo "BUILDING: ${dockerdir} with the tag: ${TAG}"
-        docker build -t ${TAG} ${dockerdir}/
+        docker build -t "${TAG}" "${dockerdir}/"
     else
         echo "BUILDING: ${dockerdir} with the tag: ${TAG_PREFIX}/${TAG}"
-        docker build -t ${TAG_PREFIX}/${TAG} ${dockerdir}/
+        docker build -t "${TAG_PREFIX}/${TAG}" "${dockerdir}/"
     fi
 done
