@@ -6,7 +6,7 @@ HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 
 export TAG_PREFIX="${TAG_PREFIX:-dvcorg}"
 
-find "${HERE}" -name Dockerfile | sort | while read -r filepath ; do
+find . -name Dockerfile | sort | while read -r filepath ; do
     dockerdir=$(dirname "${filepath}")
     tagfile="${dockerdir}/Dockertag"
     if [ -f "${tagfile}" ] ; then
