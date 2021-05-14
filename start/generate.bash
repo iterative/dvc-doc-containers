@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -uvex
 
 HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 

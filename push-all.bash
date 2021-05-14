@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -vex
+set -uvex
 
 HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 export RELEASE_HASH="${RELEASE_HASH:-$(curl -s https://api.github.com/repos/iterative/dvc/releases/latest | sha256sum | cut -c -8)}"

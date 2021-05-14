@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -vex
+set -uvex
 
 HERE="$( cd "$(dirname "$0")" ; pwd -P )"
 
