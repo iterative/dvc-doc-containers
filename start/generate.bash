@@ -14,9 +14,7 @@ mkdir build
 # Clone dvc-get-started
 git clone https://github.com/iterative/dvc-get-started build/dvc-get-started
 
-GIT_TAGS=$(git -C dvc-get-started tag --list)
-
-for TAG in ${GIT_TAGS} ; do
+git -C build/dvc-get-started tag --list | while read -r TAG ; do
     TAG_DIR="build/${TAG}"
     mkdir -p "${TAG_DIR}" 
 
