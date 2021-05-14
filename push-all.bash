@@ -17,7 +17,7 @@ find $DIR -name Dockerfile | sort | while read -r filepath ; do
     else
         TAG=$(echo "${dockerdir}[3,100]}" | tr '/ ' '--')
     fi
-    if [[ "${TAG}" ~= '.*/.*' ]] ; then
+    if [[ "${TAG}" =~ "${TAG_PREFIX}/" ]] ; then
         echo "PUSHING: ${dockerdir} with the tag: ${TAG}"
         docker push ${TAG}
     else 
